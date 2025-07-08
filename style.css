@@ -1,0 +1,170 @@
+/* Reset y base */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #e6f2e6;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #2e8b57;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    flex: 1;
+}
+
+.nav-links a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    background-color: #3cb371;
+}
+
+/* Botón de cambio de idioma */
+#lang-toggle {
+    background: #fff;
+    color: #2e8b57;
+    border: 1px solid #2e8b57;
+    padding: 6px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 6px;
+}
+
+/* Footer */
+footer {
+    background-color: #2e8b57;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Main */
+main {
+    min-height: calc(100vh - 120px); /* Altura vista menos navbar + footer aprox */
+    padding: 1rem;
+}
+
+/* Sección home */
+.home {
+    text-align: center;
+    margin: 2rem auto;
+}
+
+/* Sección info-juego */
+.info-juego {
+    background: #dff0d8;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem auto;
+    max-width: 900px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.info-juego h2 {
+    color: #2e8b57;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.game-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-content img {
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #a3c293;
+}
+
+.text-content {
+    max-width: 550px;
+}
+
+.text-content p {
+    font-size: 1.1rem;
+    color: #3a5f3a;
+    margin-bottom: 1rem;
+}
+
+.text-content ul {
+    list-style: inside disc;
+    color: #2e8b57;
+    font-weight: 600;
+}
+
+/* Formulario contacto */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #f5fff5;
+    border: 1px solid #b2d8b2;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.contact-form label {
+    font-weight: bold;
+    color: #2e8b57;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #2e8b57;
+    outline: none;
+}
+
+.contact-form button {
+    background-color: #2e8b57;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #3cb371;
+}

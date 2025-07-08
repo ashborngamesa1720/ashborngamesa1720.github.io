@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto - ROLLVENTURES</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="translate.js" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <button id="lang-toggle">EN/ES</button>
+  </nav>
+
+  <main>
+    <section>
+      <h1 data-es="Contáctanos" data-en="Contact Us">Contáctanos</h1>
+      <p data-es="Envía tus dudas, sugerencias o comentarios sobre el juego." data-en="Send us your questions, suggestions or comments about the game.">
+        Envía tus dudas, sugerencias o comentarios sobre el juego.
+      </p>
+
+      <form class="contact-form">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Mensaje:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 ROLLVENTURES. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Firebase SDKs + conexión a Firestore -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA_Vxrh8uHZdCCwjOfVIKN_lPF5c6wXLEA",
+      authDomain: "pagina-web-integradora-6b587.firebaseapp.com",
+      projectId: "pagina-web-integradora-6b587",
+      storageBucket: "pagina-web-integradora-6b587.firebasestorage.app",
+      messagingSenderId: "33667857744",
+      appId: "1:33667857744:web:5f5a758d9bddccfaec8055",
+      measurementId: "G-9YT33923LH"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.querySelector('.contact-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.querySelector('#name').value;
+      const email = document.querySelector('#email').value;
+      const message = document.querySelector('#message').value;
+
+      try {
+        await addDoc(collection(db, "mensajes"), {
+          name,
+          email,
+          message,
+          fecha: new Date()
+        });
+
+        alert("✅ ¡Mensaje enviado con éxito!");
+        e.target.reset();
+      } catch (error) {
+        console.error("❌ Error al enviar mensaje:", error);
+        alert("Hubo un error. Intenta más tarde.");
+      }
+    });
+  </script>
+</body>
+</html>
+
