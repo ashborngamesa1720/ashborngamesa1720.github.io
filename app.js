@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Registro de Service Worker
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('serviceworker.js')
+    navigator.serviceWorker.register('./serviceworker.js')
       .then(reg => console.log('Service Worker registrado:', reg.scope))
       .catch(err => console.error('Error al registrar el Service Worker:', err));
   }
