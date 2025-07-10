@@ -33,10 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
     alert('Estás en modo offline. Algunas funciones pueden no estar disponibles.');
   }
 
-  // Registro de Service Worker
+  // Registro de Service Worker con W mayúscula
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./serviceworker.js')
+    navigator.serviceWorker.register('./serviceWorker.js')
       .then(reg => console.log('Service Worker registrado:', reg.scope))
       .catch(err => console.error('Error al registrar el Service Worker:', err));
   }
 });
+
+
+
