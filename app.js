@@ -29,3 +29,27 @@ if ('serviceWorker' in navigator) {
             .catch(err => console.error('Error al registrar el Service Worker:', err));
     });
 }
+
+// Botón para instalar la PWA
+const installBtn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'inline-block';
+
+    installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                console.log('Usuario aceptó la instalación');
+            } else {
+                console.log('Usuario canceló la instalación');
+            }
+            deferredPrompt = null;
+            installBtn.style.display = 'none';
+        }
+    });
+});
+
