@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2e8b57" />
     <title>ROLLVENTURES</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="icon.png" />
     <script src="app.js" defer></script>
     <script src="translate.js" defer></script>
 </head>
@@ -31,7 +33,7 @@
         <section class="info-juego">
             <h2 data-en="About the Game" data-es="Acerca del Videojuego">Acerca del Videojuego</h2>
             <div class="game-content">
-                <img src="ROLLVENTURES.jpeg" alt="Imagen del videojuego Rollventures" />
+                <img src="image.png" alt="Imagen del videojuego Rollventures" />
                 <div class="text-content">
                     <p data-es="Rollventures es un videojuego que integra los Objetivos de Desarrollo Sostenible de la ONU, promoviendo la conciencia ambiental a través del entretenimiento interactivo."
                        data-en="Rollventures is a video game integrating the UN Sustainable Development Goals, promoting environmental awareness through interactive entertainment.">
@@ -47,7 +49,7 @@
             </div>
         </section>
 
-        <!-- Botón de descarga PWA -->
+        <!-- Botón de instalación PWA -->
         <section class="install-section" style="text-align: center; margin-top: 2rem;">
             <button id="installBtn" style="
                 background-color: #2e8b57;
@@ -58,7 +60,7 @@
                 border-radius: 6px;
                 cursor: pointer;
                 display: none;
-            ">Descargar App</button>
+            " data-en="Install App" data-es="Instalar App">Instalar App</button>
         </section>
     </main>
 

@@ -1,46 +1,82 @@
-const CACHE_NAME = 'rollventures-cache-v1';
+const CACHE_NAME = 'rollventures-cache-v2';
 const urlsToCache = [
-  './',
-  './index.html',
-  './about.html',
-  './contact.html',
-  './style.css',
-  './app.js',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png',
-  './ROLLVENTURES.jpeg'
+  '/',
+  '/index.html',
+  '/about.html',
+  '/contact.html',
+  '/style.css',
+  '/app.js',
+  '/translate.js',
+  '/manifest.json',
+  '/icon.png',
+  '/image.png',
+  '/serviceWorker.js'
 ];
 
-self.addEventListener('install', event => {
+self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
+      .then((cache) => {
+        console.log('[ServiceWorker] Cache abierto');
+        return cache.addAll(urlsToCache);
+      })
+      .catch((error) => {
+        console.log('[ServiceWorker] Error al cachear', error);
+      })
   );
-  self.skipWaiting();
-  console.log('[ServiceWorker] Instalado');
 });
 
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
+  const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then(keyList => {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        keyList.map(key => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
+        cacheNames.map((cacheName) => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
           }
         })
       );
     })
   );
-  self.clients.claim();
-  console.log('[ServiceWorker] Activado');
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
-  );
+    caches.match(event.request)
+      .then((response) => {
+        // Cache hit - return response
+        if (response) {
+          return response;
+        }
+
+        // Clone the request
+        const fetchRequest = event.request.clone();
+
+        return fetch(fetchRequest).then(
+          (response) => {
+            // Check if we received a valid response
+            if(!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            // Clone the response
+            const responseToCache = response.clone();
+
+            caches.open(CACHE_NAME)
+              .then((cache) => {
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          }
+        );
+      })
+    );
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data.action === 'skipWaiting') {
+    self.skipWaiting();
+  }
 });
